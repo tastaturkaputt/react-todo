@@ -12,22 +12,24 @@ describe('AddTodo', () => {
   });
 
   it('should call onAddTodo if valid todo text entered', () => {
+    var todoText = 'Valid Todo';
     var spy = expect.createSpy();
     var addTodo = TestUtils.renderIntoDocument(<AddTodo onAddTodo={spy}/>);
     var $el = $(ReactDOM.findDOMNode(addTodo));
 
-    addTodo.refs.todoText.value = 'Valid Todo';
+    addTodo.refs.todoText.value = todoText;
     TestUtils.Simulate.submit($el.find('form')[0]);
 
-    expect(spy).toHaveBeenCalledWith('Valid Todo');
+    expect(spy).toHaveBeenCalledWith(todoText);
   });
 
   it('should not call onAddTodo if invalid todo text entered', () => {
+    var todoText = '';
     var spy = expect.createSpy();
     var addTodo = TestUtils.renderIntoDocument(<AddTodo onAddTodo={spy}/>);
     var $el = $(ReactDOM.findDOMNode(addTodo));
 
-    addTodo.refs.todoText.value = '';
+    addTodo.refs.todoText.value = todoText;
     TestUtils.Simulate.submit($el.find('form')[0]);
 
     expect(spy).toNotHaveBeenCalled();
