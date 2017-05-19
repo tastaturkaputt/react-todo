@@ -25,9 +25,11 @@ describe('Reducers', () => {
       var action = {
         type: 'TOGGLE_SHOW_COMPLETED'
       };
-      var res = reducers.showCompletedReducer(df(false), df(action));
+      var res1 = reducers.showCompletedReducer(df(false), df(action));
+      expect(res1).toEqual(true);
 
-      expect(res).toEqual(!action.showCompleted);
+      var res2 = reducers.showCompletedReducer(df(true), df(action));
+      expect(res2).toEqual(false);
     });
 
   });
@@ -43,6 +45,24 @@ describe('Reducers', () => {
 
       expect(res.length).toEqual(1);
       expect(res[0].text).toEqual(action.text);
+    });
+
+    it('should add existing todos', () => {
+      var todos = [{
+        id: 111,
+        text: 'test',
+        completed: false,
+        completedAt: undefined,
+        createdAt: 33000
+      }];
+      var action = {
+        type: 'ADD_TODOS',
+        todos: todos
+      };
+      var res = reducers.todosReducer(df([]), df(action));
+
+      expect(res.length).toEqual(1);
+      expect(res[0]).toEqual(todos[0]);
     });
 
     it('should toggle existing todo', () => {
