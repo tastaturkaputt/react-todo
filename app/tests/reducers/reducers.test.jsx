@@ -32,4 +32,37 @@ describe('Reducers', () => {
 
   });
 
+  describe('todosReducer', () => {
+
+    it('should add new todo', () => {
+      var action = {
+        type: 'ADD_TODO',
+        text: 'New Todo'
+      };
+      var res = reducers.todosReducer(df([]), df(action));
+
+      expect(res.length).toEqual(1);
+      expect(res[0].text).toEqual(action.text);
+    });
+
+    it('should toggle existing todo', () => {
+      var defaultState = [{
+        id: 43,
+        text: 'Some Todo',
+        completed: false,
+        createdAt: 10,
+        completedAt: undefined
+      }];
+      var action = {
+        type: 'TOGGLE_TODO',
+        id: 43
+      };
+      var res = reducers.todosReducer(df(defaultState), df(action));
+
+      expect(res[0].completed).toEqual(true);
+      expect(res[0].completedAt).toNotEqual(undefined);
+    });
+
+  });
+
 });
