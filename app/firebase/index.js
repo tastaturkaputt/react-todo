@@ -3,12 +3,12 @@ import firebase from 'firebase';
 try {
   // Initialize Firebase
   var config = {
-    apiKey: "AIzaSyCibI2FNL4i-eJ3wnkyccYTVdBwJcLM4PI",
-    authDomain: "tastaturkaputt-todo-app.firebaseapp.com",
-    databaseURL: "https://tastaturkaputt-todo-app.firebaseio.com",
-    projectId: "tastaturkaputt-todo-app",
-    storageBucket: "tastaturkaputt-todo-app.appspot.com",
-    messagingSenderId: "143389658738"
+    apiKey: process.env.API_KEY,
+    authDomain: process.env.AUTH_DOMAIN,
+    databaseURL: process.env.DATABASE_URL,
+    projectId: process.env.PROJECT_ID,
+    storageBucket: process.env.STORAGE_BUCKET,
+    messagingSenderId: process.env.MESSAGING_SENDER_ID
   };
 
   firebase.initializeApp(config);
