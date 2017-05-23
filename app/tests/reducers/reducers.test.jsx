@@ -96,4 +96,33 @@ describe('Reducers', () => {
 
   });
 
+  describe('authReducer', () => {
+
+    it('should store uid in auth state', () => {
+      var action = {
+        type: 'LOGIN',
+        uid: 'someuid'
+      };
+      var expectedState = {
+          uid: action.uid
+      };
+
+      var res1 = reducers.authReducer(undefined, df(action));
+      expect(res1).toEqual(expectedState);
+    });
+
+    it('should remove uid in auth state', () => {
+      var defaultState = {
+          uid: 'someuid'
+      };
+      var action = {
+        type: 'LOGOUT'
+      };
+      var res1 = reducers.authReducer(df(defaultState), df(action));
+      expect(res1).toEqual({});
+
+    });
+
+  });
+
 });
